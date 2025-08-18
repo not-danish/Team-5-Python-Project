@@ -1,7 +1,65 @@
-
-import pandas as pd
 import os
+import json
 
+if not os.path.exists("users.json"):
+    with open("users.json", "w") as f:
+        json.dump({"data": []}, f, indent=4)
+
+
+class UserProfileManager:
+
+    def load_profiles(self):
+        with open("users.json", "r") as f:
+            return json.load(f)
+
+    def get_next_user_id(self):
+        num_users = len(self.load_profiles()['data'])
+        return num_users + 1
+
+    def create_profile(self):
+        user_id = self.get_next_user_id()
+        name = input("Enter name: ")
+        group_size = input("Enter group size: ")
+        preferred_environment = input("Enter preferred environment (Ex: Mountain, Beach, City): ")
+        min_budget = input("Enter Minimum budget: ")
+        max_budget = input("Enter Maximum budget: ")
+        
+        check_in = input("Enter check in date: ")
+        check_out = input("Enter check out date: ")
+
+        travel_dates = (check_in, check_out)
+        location = input("Enter location: ")
+
+        new_profile = {
+            "user_id": user_id,
+            "name": name,
+            "group_size": group_size,
+            "preferred_environment": preferred_environment,
+            "min_budget": min_budget,
+            "max_budget": max_budget,
+            "travel_dates": travel_dates,
+            "location": location
+        }
+
+        print(f"profile created with user_id: {user_id}")
+
+        return new_profile
+
+    def save_profile(self, profile):
+        data = self.load_profiles()
+        data["data"].append(profile)
+        with open("users.json", "w") as f:
+            json.dump(data, f, indent=4)
+
+
+user_1 = UserProfileManager()
+profile = user_1.create_profile()
+user_1.save_profile(profile)
+
+
+
+
+'''
 class UserProfileManager:
     def __init__(self, file_name="user_profiles.csv"):
         self.file_name = file_name
@@ -107,3 +165,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+'''

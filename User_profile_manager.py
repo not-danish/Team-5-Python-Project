@@ -13,7 +13,7 @@ class UserProfileManager:
         else:
             return pd.DataFrame(columns=[
                 "user_id", "name", "group_size", "preferred_environment",
-                "budget_range", "travel_dates" 
+                "min_budget","max_budget", "travel_dates" 
             ])
 
     def save_profiles(self):
@@ -29,8 +29,9 @@ class UserProfileManager:
         user_id = self.get_next_user_id()
         name = input("Enter name: ")
         group_size = input("Enter group size: ")
-        preferred_environment = input("Enter preferred environment: ")
-        budget_range = input("Enter budget range: ")
+        preferred_environment = input("Enter preferred environment: (Ex: Mountain, beach, City, etc) ")
+        min_budget = input("Enter Minimum budget: ")
+        max_budget = input("Enter Maximum budget: ")
         travel_dates = input("Enter travel dates (optional): ")
 
         new_profile = {
@@ -38,7 +39,8 @@ class UserProfileManager:
             "name": name,
             "group_size": group_size,
             "preferred_environment": preferred_environment,
-            "budget_range": budget_range,
+            "min_budget": min_budget,
+            "max_budget": max_budget,
             "travel_dates": travel_dates
         }
 
@@ -63,7 +65,7 @@ class UserProfileManager:
 
         i = index[0]
         print("Leave blank to keep current value.")
-        for col in ["name", "group_size", "preferred_environment", "budget_range", "travel_dates"]:
+        for col in ["name", "group_size", "preferred_environment", "min_budget","max_budget", "travel_dates"]:
             current = self.df.at[i, col]
             new_val = input(f"{col} [{current}]: ")
             if new_val:
@@ -98,6 +100,7 @@ def main():
         elif choice == "4":
             manager.delete_profile()
         elif choice == "5":
+            print("Thank you! Have a great day! ")
             break
         else:
             print("Invalid choice. Try again.")

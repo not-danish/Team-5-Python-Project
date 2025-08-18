@@ -13,7 +13,7 @@ class UserProfileManager:
         else:
             return pd.DataFrame(columns=[
                 "user_id", "name", "group_size", "preferred_environment",
-                "budget_range", "travel_dates"
+                "budget_range", "travel_dates" 
             ])
 
     def save_profiles(self):

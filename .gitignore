@@ -207,3 +207,8 @@ marimo/_lsp/
 __marimo__/
 
 users.json
+Clean Dataset CSV.csv
+
+UI/node_modules
+UI/
+.DS_Store

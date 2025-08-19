@@ -65,6 +65,18 @@ class UserProfileManager:
         data = self.load_profiles()
         for user in data['data']:
             if user == profile:
+                if attribute == 'travel_dates':
+                    date_changed = input("Which date would you like to change? (check_in/check_out): ")
+                    if date_changed == 'check_in':
+                        user['travel_dates'][0] = new_value
+                    elif date_changed == 'check_out':
+                        user['travel_dates'][1] = new_value
+                else:
+                    if attribute in user:
+                        user[attribute] = new_value
+                    else:
+                        print(f"Attribute {attribute} does not exist in the profile.")
+                        return
                 user[attribute] = new_value
 
         with open("users.json", "w") as f:
@@ -91,10 +103,6 @@ def main():
             continue
         elif choice == "3":
             attribute = input("What attribute would you like to update?: ")
-
-            if attribute not in ['name', 'group_size', 'preferred_environment', 'min_budget', 'max_budget', 'travel_dates', 'location']:
-                print("Invalid choice. Please try again. ")
-                continue
             
             new_value = input("What is the new value for this attribute? ")
             manager.edit_profile(profile, attribute, new_value)

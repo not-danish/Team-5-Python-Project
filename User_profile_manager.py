@@ -27,7 +27,7 @@ class UserProfileManager:
         check_in = input("Enter check in date: ")
         check_out = input("Enter check out date: ")
 
-        travel_dates = (check_in, check_out)
+        travel_dates = [check_in, check_out]
         location = input("Enter location: ")
 
         new_profile = {
@@ -49,14 +49,41 @@ class UserProfileManager:
         data = self.load_profiles()
         data["data"].append(profile)
         with open("users.json", "w") as f:
-            json.dump(data, f, indent=4)
+            json.dump(data, f, indent = 4)
+        
+    def delete_profile(self, profile):
+        data = self.load_profiles()
+        updated_user_list = [data["data"][index] for index in range(len(data['data'])) 
+                            if data['data'][index]["user_id"] != profile["user_id"]]
+
+        data["data"] = updated_user_list
+        with open("users.json", "w") as f:
+            json.dump(data, f, indent = 4)
+        print("Profile successfully Deleted! ")
+    
+    def edit_profile(self, profile, attribute, new_value):
+        data = self.load_profiles()
+        for user in data['data']:
+            if user == profile:
+                user[attribute] = new_value
+
+        with open("users.json", "w") as f:
+            json.dump(data, f, indent = 4)
+        print(f"Profile successfully edited with new attribute: {attribute}: {new_value}! ")
+        
+    
 
 
 user_1 = UserProfileManager()
 profile = user_1.create_profile()
 user_1.save_profile(profile)
 
+user_1.edit_profile(profile, 'min_budget', 1200)
 
+query = input("Would you like to Delete User?: ")
+
+if query == "y":
+    user_1.delete_profile(profile)
 
 
 '''

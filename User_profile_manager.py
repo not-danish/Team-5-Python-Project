@@ -20,7 +20,10 @@ class UserProfileManager:
         user_id = self.get_next_user_id()
         name = input("Enter name: ")
         group_size = input("Enter group size: ")
-        preferred_environment = input("Enter preferred environment (Ex: Mountain, Beach, City): ")
+        
+        preferred_type = input("Enter preferred Type (Ex: House, Cabin, Condo): ")
+        preferred_environment = input("Enter preferred Environment (Ex: Beach, Mountain, City): ")
+
         min_budget = input("Enter Minimum budget: ")
         max_budget = input("Enter Maximum budget: ")
         
@@ -30,11 +33,14 @@ class UserProfileManager:
         travel_dates = [check_in, check_out]
         location = input("Enter location: ")
 
+        # must have features
+
         new_profile = {
             "user_id": user_id,
             "name": name,
             "group_size": group_size,
-            "preferred_environment": preferred_environment,
+            "preferred_type": preferred_type,
+            "preffered_environment": preferred_environment,
             "min_budget": min_budget,
             "max_budget": max_budget,
             "travel_dates": travel_dates,

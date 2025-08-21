@@ -43,7 +43,7 @@ class UserProfileManager:
             "location": location
         }
 
-        print(f"profile created with user_id: {user_id}")
+        print(f"profile created with ID: {user_id}. Please make sure to remember this ID!")
 
         return new_profile
 
@@ -97,6 +97,8 @@ def main():
         print("5. Exit")
         choice = input("Enter your choice: ")
 
+        profile = None
+
         if choice == "1":
             profile = manager.create_profile()
             manager.save_profile(profile)
@@ -104,10 +106,17 @@ def main():
             #manager.view_profile()
             continue
         elif choice == "3":
-            attribute = input("What attribute would you like to update?: ")
-            
-            new_value = input("What is the new value for this attribute? ")
-            manager.edit_profile(profile, attribute, new_value)
+            try:
+                user_id = input("Please input your user ID: ")
+            except ValueError:
+                print("You have entered an invalid user ID. Please try again...")
+
+            if profile == None:
+                print("You can't edit a profile before creating it! ")
+            else:
+                attribute = input("What attribute would you like to update?: ")
+                new_value = input("What is the new value for this attribute? ")
+                manager.edit_profile(profile, attribute, new_value)
         elif choice == "4":
             manager.delete_profile(profile)
         elif choice == "5":

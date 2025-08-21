@@ -1,5 +1,7 @@
 import os
 import json
+import pandas as pd
+
 
 if not os.path.exists("users.json"):
     with open("users.json", "w") as f:
@@ -22,8 +24,8 @@ class UserProfileManager:
         group_size = input("Enter group size: ")
         preferred_environment = input("Enter preferred environment (Ex: Mountain, Beach, City): ")
         preferred_type = input("Enter preferred type (Ex: house, cabin, condo): ")
-        Must_have_features = input("Enter must-have features (comma separated) (Ex: WI-FI, BBQ Grill, Washer): ").split(",")
-        budget = input("Enter budget: ")
+        Must_have_features = input("Enter preferred features (comma separated) (Ex: WI-FI, BBQ Grill, Washer): ").split(",")
+        budget = input("Enter budget (per night): ")
         
         check_in = input("Enter check in date: ")
         check_out = input("Enter check out date: ")
@@ -86,12 +88,10 @@ class UserProfileManager:
         print(f"Profile successfully edited with new attribute: {attribute}: {new_value}! ")
         
 ### Step3
-import pandas as pd
-
 class PropertyRecommender:
     def __init__(self, dataset_path="/Users/yoyoyue/Desktop/properties_updated.json"):
         # 读入 CSV 文件
-        self.df = pd.read_json(dataset_path)
+        self.df = pd.read_json("properties_updated.json")
 
     def compute_fit_score(self, profile, property_row):
         """
@@ -100,29 +100,41 @@ class PropertyRecommender:
         property_row: pandas.Series
         """
         score = 0
-        total_score = 0
 
         # 1. preferred_environment (权重 0.1, 满分 10)
+        W_ENV = 0.1
         env_value = str(property_row.data["Environment"]).lower()
-        env_score = 10 if profile["preferred_environment"].lower() == env_value else 0
-        score += env_score
-        total_score += 10
-
+        env_score = (10 * W_ENV) if profile["preferred_environment"].lower() == env_value else 0
         
-
         # 2. preferred_type (权重 0.1, 满分 10)
+        W_TYPE = 0.1
         type_value = str(property_row.data["Type"]).lower()
-        type_score = 10 if profile["preferred_type"].lower() == type_value else 0
-        score += type_score
-        total_score += 10
+        type_score = (10 * W_TYPE) if profile["preferred_type"].lower() == type_value else 0
 
         # 3. cancellation_policy (权重 0.1, 满分 10)
+        W_CANCELLATION = 0.1
         cancellation_policy = str(property_row.data["Cancellation_policy"]).lower()
-        cancel_score = 10 if cancellation_policy in ["flexible", "moderate"] else 0
-        score += cancel_score
-        total_score += 10
+        cancel_score = (10 * W_CANCELLATION) if cancellation_policy in ["flexible", "moderate"] else 0
 
-        return (score / total_score) * 100 if total_score > 0 else 0
+        # 4. Budget
+        W_BUDGET = 0.4
+        price_of_property = int(property_row.data["Nightly price"])
+        user_budget = int(profile["budget"])
+        budget_score = (((user_budget - price_of_property)/user_budget) * 10 ) * W_BUDGET
+
+        # 5. Features
+        W_FEATURES  = 0.3
+        must_have_features = [f.strip().lower() for f in profile.get("Must_have_features",[]) if f.strip()]
+        property_features = str(property_row.data["features"]).lower().split(",")
+        property_features = [f.strip() for f in property_features]
+
+        if must_have_features:
+            matched = sum(1 for feature in must_have_features if feature in property_features)
+            feat_score = (10 * (matched / len(must_have_features))) * W_FEATURES
+
+        score = env_score + type_score + cancel_score + budget_score + feat_score
+
+        return round(score,2)
 
 
     def recommend(self, profile, top_n=5):
@@ -133,33 +145,23 @@ class PropertyRecommender:
         self.df["fit_score"] = self.df.apply(
             lambda row: self.compute_fit_score(profile, row), axis=1
         )
-        
-        '''
-        for idx, row in self.df.iterrows():
-            if str(profile["location"]).lower() != str(row.loc["City"]).lower():
-                continue  # 跳过不在该城市的房源
-            fit_score = self.compute_fit_score(profile, row)
-            recommendations.append((row.to_dict(), fit_score))
-        '''
+
+        expanded = self.df["data"].apply(pd.Series)
+        df_fixed = pd.concat([expanded, self.df.drop(columns=["data"])], axis=1)
+
+        df_fixed = df_fixed[df_fixed["City"].str.lower() == str(profile["location"]).lower()]
+        recommendations = df_fixed.sort_values('fit_score', ascending=False).head(top_n)
+        recommendations = recommendations.to_dict(orient="records")
 
 
-        # 按照 fit_score 降序排列
-        recommendations = self.df.sort_values('fit_score', ascending=False).head(5)
-        recommendations = recommendations['data'].tolist()
-
-        recommendations = [recommendations[i] for i in range(len(recommendations)) if str(profile["location"]).lower() == str(recommendations[i]["City"]).lower()]
-
-                
         for i in range(len(recommendations)):
-            #recommendations[i]['fit_score'] = self.compute_fit_score(profile, pd.Series({'data': property}))
-            
             print(f"{i+1}. Location: {recommendations[i]['City'] }")
             print(f"   Type: {recommendations[i]['Type']}, Environment: {recommendations[i]['Environment']}")
             print(f"   Cancellation: {recommendations[i]['Cancellation_policy']}")
             print(f"   Features: {recommendations[i]['features']}")
+            print(f" Price: {recommendations[i]['Nightly price']}")
+            print(f" Fit_Score: {recommendations[i]['fit_score']}")
             print()
-
-        
 
     
 def main():
@@ -172,7 +174,8 @@ def main():
         print("2. View Profile")
         print("3. Edit Profile")
         print("4. Delete Profile")
-        print("5. Exit")
+        print("5. Property Recommendations")
+        print("6. Exit")
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -188,9 +191,9 @@ def main():
             manager.edit_profile(profile, attribute, new_value)
         elif choice == "4":
             manager.delete_profile(profile)
-        elif choice == "5":
+        elif choice == "6":
             print("Thank you! Have a great day! ")
-        elif choice == "6":   # ⭐ 推荐功能
+        elif choice == "5":   # ⭐ 推荐功能
             user_id = int(input("Enter your user_id: "))
             profiles = manager.load_profiles()["data"]
             profile = next((p for p in profiles if p["user_id"] == user_id), None)

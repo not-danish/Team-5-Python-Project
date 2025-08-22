@@ -1,4 +1,4 @@
-# Set up Instruction
+# Setup Instruction
 
 ## 1. Project Overview
 

@@ -86,6 +86,39 @@ class UserProfileManager:
         with open("users.json", "w") as f:
             json.dump(data, f, indent = 4)
         print(f"Profile successfully edited with new attribute: {attribute}: {new_value}! ")
+
+    def view_profile(self, user_id):
+        data = self.load_profiles()
+
+        if user_id == 'ALL':
+            print("")
+            print("------ ALL USERS ------")
+            for user in data['data']:
+                print("")
+                print(f"-------------- USER {user['user_id']} --------------")
+                print(f"User ID: {user['user_id']}")
+                print(f"Name: {user['name']}")
+                print(f"Group Size: {user['group_size']}")
+                print(f"Preferred Environment: {user['preferred_environment']}")
+                print(f"Preferred Type: {user['preferred_type']}")
+                print(f"Preferred Features: {user['Must_have_features']}")
+                print(f"Budget: {user['budget']}")
+                print(f"Travel Location: {user['location']}")
+                print()
+        else:
+            user_profile = [user for user in data['data'] 
+                            if int(user['user_id']) == int(user_id)]
+            print("")
+            print(f"-------------- USER {user_id} --------------")
+            print(f"User ID: {user_profile[0]['user_id']}")
+            print(f"Name: {user_profile[0]['name']}")
+            print(f"Group Size: {user_profile[0]['group_size']}")
+            print(f"Preferred Environment: {user_profile[0]['preferred_environment']}")
+            print(f"Preferred Type: {user_profile[0]['preferred_type']}")
+            print(f"Preferred Features: {user_profile[0]['Must_have_features']}")
+            print(f"Budget: {user_profile[0]['budget']}")
+            print(f"Travel Location: {user_profile[0]['location']}")
+            print("-----------------------------------")
         
 ### Step3
 class PropertyRecommender:
@@ -182,7 +215,8 @@ def main():
             profile = manager.create_profile()
             manager.save_profile(profile)
         elif choice == "2":
-            #manager.view_profile()
+            user_id = input("Enter the user profile you want to view (Enter 'ALL' for all users): ")
+            manager.view_profile(user_id)
             continue
         elif choice == "3":
             attribute = input("What attribute would you like to update?: ")

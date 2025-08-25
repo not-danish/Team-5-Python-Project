@@ -219,12 +219,15 @@ def main():
             manager.view_profile(user_id)
             continue
         elif choice == "3":
+            user_id = input("Enter the user profile you want to delete: ")
+
             attribute = input("What attribute would you like to update?: ")
-            
             new_value = input("What is the new value for this attribute? ")
+            
             manager.edit_profile(profile, attribute, new_value)
         elif choice == "4":
-            manager.delete_profile(profile)
+            user_id = input("Enter the user profile you want to delete: ")
+            manager.delete_profile(user_id)
         elif choice == "6":
             print("Thank you! Have a great day! ")
         elif choice == "5":   # ⭐ 推荐功能

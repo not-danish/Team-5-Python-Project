@@ -65,10 +65,10 @@ class UserProfileManager:
             json.dump(data, f, indent = 4)
         print("Profile successfully Deleted! ")
     
-    def edit_profile(self, profile, attribute, new_value):
+    def edit_profile(self, user_id, attribute, new_value):
         data = self.load_profiles()
         for user in data['data']:
-            if user == profile:
+            if int(user['user_id']) == int(user_id):
                 if attribute == 'travel_dates':
                     date_changed = input("Which date would you like to change? (check_in/check_out): ")
                     if date_changed == 'check_in':
@@ -224,7 +224,7 @@ def main():
             attribute = input("What attribute would you like to update?: ")
             new_value = input("What is the new value for this attribute? ")
             
-            manager.edit_profile(profile, attribute, new_value)
+            manager.edit_profile(user_id, attribute, new_value)
         elif choice == "4":
             user_id = input("Enter the user profile you want to delete: ")
             manager.delete_profile(user_id)

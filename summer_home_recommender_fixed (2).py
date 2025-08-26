@@ -2,10 +2,14 @@ import os
 import json
 import pandas as pd
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ------------------- LLM Query -------------------
 def query_openrouter(prompt):
-    API_KEY = "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"
+    API_KEY = os.getenv("OPENROUTER_API_KEY")
+
     if not API_KEY:
         raise ValueError("Please set OPENROUTER_API_KEY in your environment")
 
@@ -19,19 +23,32 @@ def query_openrouter(prompt):
 
     data = {
         "model": "deepseek/deepseek-r1:free",
-        "messages": [{"role": "user", "content": prompt}]
+        "messages": [{"role": "user", "content": prompt}],
+        "stream": True   # ✅ Enable streaming mode
     }
 
     try:
-        response = requests.post(url, headers=headers, json=data)
-        response.raise_for_status()
-        result = response.json()
-
-        if "choices" not in result or len(result["choices"]) == 0:
-            print("⚠️ No response returned from LLM")
-            return None
-
-        return result["choices"][0]["message"]["content"]
+        with requests.post(url, headers=headers, json=data, stream=True) as response:
+            response.raise_for_status()
+            full_response = ""
+            print("\n🔮 AI-Powered Property Recommendations:\n")
+            for line in response.iter_lines():
+                if line:
+                    decoded_line = line.decode("utf-8")
+                    if decoded_line.startswith("data: "):
+                        chunk = decoded_line[len("data: "):]
+                        if chunk.strip() == "[DONE]":
+                            break
+                        try:
+                            content = json.loads(chunk)
+                            delta = content.get("choices", [{}])[0].get("delta", {}).get("content", "")
+                            if delta:
+                                full_response += delta
+                                print(delta, end="", flush=True)  # ✅ Print instantly
+                        except json.JSONDecodeError:
+                            continue
+            print("\n")  # Finish with a new line
+            return full_response if full_response else None
 
     except requests.exceptions.HTTPError as e:
         print("LLM request failed:", e.response.text)

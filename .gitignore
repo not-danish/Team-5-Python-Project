@@ -212,3 +212,5 @@ Clean Dataset CSV.csv
 UI/node_modules
 UI/
 .DS_Store
+
+.env

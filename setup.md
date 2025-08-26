@@ -60,7 +60,7 @@ The original code is:
 ### Step3
 class PropertyRecommender:
     def __init__(self, dataset_path="/Users/yoyoyue/Desktop/properties_updated.json"):
-        # 读入 CSV 文件
+        # Insert the csv file
         self.df = pd.read_json("properties_updated.json")
 
     def compute_fit_score(self, profile, property_row):
@@ -71,17 +71,17 @@ class PropertyRecommender:
         """
         score = 0
 
-        # 1. preferred_environment (权重 0.1, 满分 10)
+        # 1. preferred_environment (Weight 0.1, full score 10)
         W_ENV = 0.1
         env_value = str(property_row.data["Environment"]).lower()
         env_score = (10 * W_ENV) if profile["preferred_environment"].lower() == env_value else 0
         
-        # 2. preferred_type (权重 0.1, 满分 10)
+        # 2. preferred_type (Weight 0.1, full score 10)
         W_TYPE = 0.1
         type_value = str(property_row.data["Type"]).lower()
         type_score = (10 * W_TYPE) if profile["preferred_type"].lower() == type_value else 0
 
-        # 3. cancellation_policy (权重 0.1, 满分 10)
+        # 3. cancellation_policy (Weight 0.1, full score 10)
         W_CANCELLATION = 0.1
         cancellation_policy = str(property_row.data["Cancellation_policy"]).lower()
         cancel_score = (10 * W_CANCELLATION) if cancellation_policy in ["flexible", "moderate"] else 0
@@ -113,7 +113,7 @@ For users who only focuses one the type who do not matter environment, budget, f
 ### Step3
 class PropertyRecommender:
     def __init__(self, dataset_path="/Users/yoyoyue/Desktop/properties_updated.json"):
-        # 读入 CSV 文件
+        # Insert the csv file
         self.df = pd.read_json("properties_updated.json")
 
     def compute_fit_score(self, profile, property_row):
@@ -124,17 +124,17 @@ class PropertyRecommender:
         """
         score = 0
 
-        # 1. preferred_environment (权重 0.1, 满分 10)
+        # 1. preferred_environment (Weight 0.1, full score 10)
         W_ENV = 0
         env_value = str(property_row.data["Environment"]).lower()
         env_score = (10 * W_ENV) if profile["preferred_environment"].lower() == env_value else 0
         
-        # 2. preferred_type (权重 0.1, 满分 10)
+        # 2. preferred_type (Weight 0.1, full score 10)
         W_TYPE = 1
         type_value = str(property_row.data["Type"]).lower()
         type_score = (10 * W_TYPE) if profile["preferred_type"].lower() == type_value else 0
 
-        # 3. cancellation_policy (权重 0.1, 满分 10)
+        # 3. cancellation_policy (Weight 0.1, full score 10)
         W_CANCELLATION = 0
         cancellation_policy = str(property_row.data["Cancellation_policy"]).lower()
         cancel_score = (10 * W_CANCELLATION) if cancellation_policy in ["flexible", "moderate"] else 0

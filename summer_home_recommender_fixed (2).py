@@ -159,45 +159,64 @@ class UserProfileManager:
 
 # ------------------- Property Recommender -------------------
 class PropertyRecommender:
-    def __init__(self, dataset_path="properties_updated.json"):
-        self.df = pd.read_json(dataset_path)
+    def __init__(self, dataset_path="/Users/yoyoyue/Desktop/properties_updated.json"):
+        # read the file
+        self.df = pd.read_json("properties_updated.json")
 
     def compute_fit_score(self, profile, property_row):
-        W_ENV, W_TYPE, W_CANCELLATION, W_BUDGET, W_FEATURES = 0.1, 0.1, 0.1, 0.3, 0.4
+        """
+        Compute fit score for a single property.
+        profile: dict
+        property_row: pandas.Series
+        """
         score = 0
 
-        env_tags = [t.lower() for t in property_row.data.get("Tags", [])]
-        if profile["preferred_environment"].lower() in env_tags:
-            score += 10 * W_ENV
-
+        # 1. preferred_environment (weight 0.1, out of 10)
+        W_ENV = 0.1
+        env_value = str(property_row.data["Environment"]).lower()
+        env_score = (10 * W_ENV) if profile["preferred_environment"].lower() == env_value else 0
+        
+        # 2. preferred_type (weight 0.1, out of 10)
+        W_TYPE = 0.1
         type_value = str(property_row.data["Type"]).lower()
-        if profile["preferred_type"].lower() == type_value:
-            score += 10 * W_TYPE
+        type_score = (10 * W_TYPE) if profile["preferred_type"].lower() == type_value else 0
 
-        cancel_policy = str(property_row.data["Cancellation_policy"]).lower()
-        if cancel_policy in ["flexible", "moderate"]:
-            score += 10 * W_CANCELLATION
+        # 3. cancellation_policy (weight 0.1, out of 10)
+        W_CANCELLATION = 0.1
+        cancellation_policy = str(property_row.data["Cancellation_policy"]).lower()
+        cancel_score = (10 * W_CANCELLATION) if cancellation_policy in ["flexible", "moderate"] else 0
 
-        price = int(property_row.data["Nightly price"])
-        budget = int(profile["budget"])
-        score += (((budget - price) / budget) * 10) * W_BUDGET
+        # 4. Budget (weight 0.3, out of 10)
+        W_BUDGET = 0.3
+        price_of_property = int(property_row.data["Nightly price"])
+        user_budget = int(profile["budget"])
+        budget_score = (((user_budget - price_of_property) / user_budget) * 10) * W_BUDGET
 
-        must_have = [f.strip().lower() for f in profile.get("Must_have_features", []) if f.strip()]
-        property_feats = [f.strip("'").lower() for f in property_row.data.get("features", [])]
-        if must_have:
-            matched = sum(1 for f in must_have if f in property_feats)
-            score += (10 * (matched / len(must_have))) * W_FEATURES
+        # 5. Features (weight 0.4, out of 10)
+        W_FEATURES  = 0.4
+        must_have_features = [f.strip().lower() for f in profile.get("Must_have_features",[]) if f.strip()]
+        property_features = str(property_row.data["features"]).lower().split(",")
+        property_features = [f.strip() for f in property_features]
 
-        location = profile.get("location", '').lower()
-        if location in str(property_row.data["City"]).lower():
-            score += 2
+        if must_have_features:
+            matched = sum(1 for feature in must_have_features if feature in property_features)
+            feat_score = (10 * (matched / len(must_have_features))) * W_FEATURES
 
-        return round(score, 2)
+        score = env_score + type_score + cancel_score + budget_score + feat_score
+
+        return round(score,2)
 
     def recommend(self, profile, top_n=5):
-        self.df["fit_score"] = self.df.apply(lambda row: self.compute_fit_score(profile, row), axis=1)
-        df_expanded = pd.concat([self.df.drop(columns=['data']), self.df['data'].apply(pd.Series)], axis=1)
-        recommendations = df_expanded.sort_values('fit_score', ascending=False).head(top_n).to_dict(orient="records")
+        self.df["fit_score"] = self.df.apply(
+            lambda row: self.compute_fit_score(profile, row), axis=1
+        )
+
+        expanded = self.df["data"].apply(pd.Series)
+        df_fixed = pd.concat([expanded, self.df.drop(columns=["data"])], axis=1)
+
+        df_fixed = df_fixed[df_fixed["City"].str.lower() == str(profile["location"]).lower()]
+        recommendations = df_fixed.sort_values('fit_score', ascending=False).head(top_n)
+        recommendations = recommendations.to_dict(orient="records")
 
         print("\nTop Property Recommendations:")
         for i, rec in enumerate(recommendations, 1):

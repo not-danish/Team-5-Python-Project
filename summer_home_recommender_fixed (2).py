@@ -171,28 +171,28 @@ class PropertyRecommender:
         """
         score = 0
 
-        # 1. preferred_environment (weight 0.1, out of 10)
+        # 1. preferred_environment (weight 0.1, out of 1)
         W_ENV = 0.1
         env_value = str(property_row.data["Environment"]).lower()
         env_score = (10 * W_ENV) if profile["preferred_environment"].lower() == env_value else 0
         
-        # 2. preferred_type (weight 0.1, out of 10)
+        # 2. preferred_type (weight 0.1, out of 1)
         W_TYPE = 0.1
         type_value = str(property_row.data["Type"]).lower()
         type_score = (10 * W_TYPE) if profile["preferred_type"].lower() == type_value else 0
 
-        # 3. cancellation_policy (weight 0.1, out of 10)
+        # 3. cancellation_policy (weight 0.1, out of 1)
         W_CANCELLATION = 0.1
         cancellation_policy = str(property_row.data["Cancellation_policy"]).lower()
         cancel_score = (10 * W_CANCELLATION) if cancellation_policy in ["flexible", "moderate"] else 0
 
-        # 4. Budget (weight 0.3, out of 10)
+        # 4. Budget (weight 0.3, out of 1)
         W_BUDGET = 0.3
         price_of_property = int(property_row.data["Nightly price"])
         user_budget = int(profile["budget"])
         budget_score = (((user_budget - price_of_property) / user_budget) * 10) * W_BUDGET
 
-        # 5. Features (weight 0.4, out of 10)
+        # 5. Features (weight 0.4, out of 1)
         W_FEATURES  = 0.4
         must_have_features = [f.strip().lower() for f in profile.get("Must_have_features",[]) if f.strip()]
         property_features = str(property_row.data["features"]).lower().split(",")

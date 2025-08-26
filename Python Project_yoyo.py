@@ -25,7 +25,9 @@ class UserProfileManager:
         preferred_environment = input("Enter preferred environment (Ex: Mountain, Beach, City): ")
         preferred_type = input("Enter preferred type (Ex: house, cabin, condo): ")
         Must_have_features = input("Enter preferred features (comma separated) (Ex: WI-FI, BBQ Grill, Washer): ").split(",")
+        
         budget = input("Enter budget (per night): ")
+        
         
         check_in = input("Enter check in date: ")
         check_out = input("Enter check out date: ")
@@ -40,7 +42,7 @@ class UserProfileManager:
             "preferred_environment": preferred_environment,
             "preferred_type": preferred_type,
             "Must_have_features": Must_have_features,
-            "budget": budget,
+            "budget": int(budget),
             "travel_dates": travel_dates,
             "location": location
         }
@@ -193,8 +195,7 @@ class PropertyRecommender:
             print(f"   Cancellation: {recommendations[i]['Cancellation_policy']}")
             print(f"   Features: {recommendations[i]['features']}")
             print(f" Price: {recommendations[i]['Nightly price']}")
-            print(f" Fit_Score: {recommendations[i]['fit_score']}")
-            print()
+            print(f" Fit_Score: {recommendations[i]['fit_score']} \n")
 
     
 def main():
@@ -230,6 +231,7 @@ def main():
             manager.delete_profile(user_id)
         elif choice == "6":
             print("Thank you! Have a great day! ")
+            break
         elif choice == "5":   # ⭐ 推荐功能
             user_id = int(input("Enter your user_id: "))
             profiles = manager.load_profiles()["data"]

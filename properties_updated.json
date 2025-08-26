@@ -398,7 +398,7 @@
         },
         {
             "City": "Miami",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 110,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -1813,7 +1813,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 145,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 97,
@@ -4071,7 +4071,7 @@
         },
         {
             "City": "Edmonton",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 275,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 100,
@@ -4407,7 +4407,7 @@
         },
         {
             "City": "Montreal",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 115,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 100,
@@ -8579,7 +8579,7 @@
         },
         {
             "City": "Vancouver",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 55,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 97,
@@ -9004,7 +9004,7 @@
         },
         {
             "City": "Toronto",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 179,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 97,
@@ -10605,7 +10605,7 @@
         },
         {
             "City": "Montreal",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 250,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 97,
@@ -11158,7 +11158,7 @@
         },
         {
             "City": "Seattle",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 150,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 98,
@@ -12561,7 +12561,7 @@
         },
         {
             "City": "New York",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 65,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 100,
@@ -13862,7 +13862,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 120,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -16696,7 +16696,7 @@
         },
         {
             "City": "Montreal",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 100,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 96,
@@ -18654,7 +18654,7 @@
         },
         {
             "City": "Edmonton",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 175,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -19270,7 +19270,7 @@
         },
         {
             "City": "Vancouver",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 65,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -19429,7 +19429,7 @@
         },
         {
             "City": "Seattle",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 95,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 95,
@@ -20178,7 +20178,7 @@
         },
         {
             "City": "Seattle",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 150,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 90,
@@ -20196,7 +20196,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 129,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -21014,7 +21014,7 @@
         },
         {
             "City": "Vancouver",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 119,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 93,
@@ -21382,7 +21382,7 @@
         },
         {
             "City": "Toronto",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 280,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 80,
@@ -22199,7 +22199,7 @@
         },
         {
             "City": "Edmonton",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 350,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 100,
@@ -22259,7 +22259,7 @@
         },
         {
             "City": "New York",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 110,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 94,
@@ -22433,7 +22433,7 @@
         },
         {
             "City": "Toronto",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 128,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 94,
@@ -23301,7 +23301,7 @@
         },
         {
             "City": "New York",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 99,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 96,
@@ -23701,7 +23701,7 @@
         },
         {
             "City": "Edmonton",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 700,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 100,
@@ -23955,7 +23955,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 155,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 93,
@@ -24353,7 +24353,7 @@
         },
         {
             "City": "Edmonton",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 150,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -24396,7 +24396,7 @@
         },
         {
             "City": "Miami",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 175,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 87,
@@ -24755,7 +24755,7 @@
         },
         {
             "City": "Montreal",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 150,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 90,
@@ -25134,7 +25134,7 @@
         },
         {
             "City": "New York",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 99,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 98,
@@ -25159,7 +25159,7 @@
         },
         {
             "City": "Vancouver",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 169,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 90,
@@ -25598,7 +25598,7 @@
         },
         {
             "City": "Miami",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 183,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 100,
@@ -25640,7 +25640,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 155,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 90,
@@ -25815,7 +25815,7 @@
         },
         {
             "City": "Toronto",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 105,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 90,
@@ -25989,7 +25989,7 @@
         },
         {
             "City": "Seattle",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 130,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 80,
@@ -26548,7 +26548,7 @@
         },
         {
             "City": "Vancouver",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 99,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 95,
@@ -26813,7 +26813,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 110,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 95,
@@ -27513,7 +27513,7 @@
         },
         {
             "City": "Edmonton",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 89,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 100,
@@ -27792,7 +27792,7 @@
         },
         {
             "City": "Toronto",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 149,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 93,
@@ -27833,7 +27833,7 @@
         },
         {
             "City": "Toronto",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 115,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 90,
@@ -27852,7 +27852,7 @@
         },
         {
             "City": "Miami",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 290,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 100,
@@ -28879,7 +28879,7 @@
         },
         {
             "City": "Seattle",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 100,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -28988,7 +28988,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 169,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 90,
@@ -29304,7 +29304,7 @@
         },
         {
             "City": "Seattle",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 129,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 87,
@@ -29584,7 +29584,7 @@
         },
         {
             "City": "Seattle",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 215,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 97,
@@ -29668,7 +29668,7 @@
         },
         {
             "City": "Vancouver",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 66,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 96,
@@ -30001,7 +30001,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 140,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 93,
@@ -30024,7 +30024,7 @@
         },
         {
             "City": "Montreal",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 140,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 98,
@@ -30414,7 +30414,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 180,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 98,
@@ -30631,7 +30631,7 @@
         },
         {
             "City": "Waterloo",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 70,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -30882,7 +30882,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 120,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 100,
@@ -30948,7 +30948,7 @@
         },
         {
             "City": "New York",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 75,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -32686,7 +32686,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 495,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 97,
@@ -36137,7 +36137,7 @@
         },
         {
             "City": "Miami",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 115,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 93,
@@ -36351,7 +36351,7 @@
         },
         {
             "City": "Waterloo",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 51,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -43873,7 +43873,7 @@
         },
         {
             "City": "Edmonton",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 65,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 95,
@@ -46774,7 +46774,7 @@
         },
         {
             "City": "Waterloo",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 100,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 93,
@@ -47674,7 +47674,7 @@
         },
         {
             "City": "Waterloo",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 110,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 92,
@@ -47982,7 +47982,7 @@
         },
         {
             "City": "Seattle",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 99,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 80,
@@ -48714,7 +48714,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 250,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -49947,7 +49947,7 @@
         },
         {
             "City": "Waterloo",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 85,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 94,
@@ -50336,7 +50336,7 @@
         },
         {
             "City": "Waterloo",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 90,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 99,
@@ -50499,7 +50499,7 @@
         },
         {
             "City": "Vancouver",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 150,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 81,
@@ -54508,7 +54508,7 @@
         },
         {
             "City": "Miami",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 70,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 100,
@@ -56688,7 +56688,7 @@
         },
         {
             "City": "Edmonton",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 100,
             "Cancellation_policy": "moderate",
             "Review_scores_rating": 93,
@@ -57564,7 +57564,7 @@
         },
         {
             "City": "Seattle",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 67,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -60309,7 +60309,7 @@
         },
         {
             "City": "Los Angeles",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 50,
             "Cancellation_policy": "flexible",
             "Review_scores_rating": 100,
@@ -62975,7 +62975,7 @@
         },
         {
             "City": "Edmonton",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 70,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 100,
@@ -63252,7 +63252,7 @@
         },
         {
             "City": "Edmonton",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 215,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 93,
@@ -64093,7 +64093,7 @@
         },
         {
             "City": "Seattle",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 150,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 93,
@@ -64483,7 +64483,7 @@
         },
         {
             "City": "Waterloo",
-            "Type": "Condominium",
+            "Type": "Condo",
             "Nightly price": 250,
             "Cancellation_policy": "strict",
             "Review_scores_rating": 100,

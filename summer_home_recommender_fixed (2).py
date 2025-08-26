@@ -9,7 +9,6 @@ load_dotenv()
 # ------------------- LLM Query -------------------
 def query_openrouter(prompt):
     API_KEY = os.getenv("OPENROUTER_API_KEY")
-
     if not API_KEY:
         raise ValueError("Please set OPENROUTER_API_KEY in your environment")
 
@@ -20,18 +19,16 @@ def query_openrouter(prompt):
         "HTTP-Referer": "http://localhost",
         "X-Title": "Summer Home Recommender"
     }
-
     data = {
         "model": "deepseek/deepseek-r1:free",
         "messages": [{"role": "user", "content": prompt}],
-        "stream": True   # ✅ Enable streaming mode
+        "stream": True
     }
 
     try:
         with requests.post(url, headers=headers, json=data, stream=True) as response:
             response.raise_for_status()
             full_response = ""
-            print("\n🔮 AI-Powered Property Recommendations:\n")
             for line in response.iter_lines():
                 if line:
                     decoded_line = line.decode("utf-8")
@@ -43,11 +40,11 @@ def query_openrouter(prompt):
                             content = json.loads(chunk)
                             delta = content.get("choices", [{}])[0].get("delta", {}).get("content", "")
                             if delta:
+                                print(delta, end="", flush=True)  # 👈 stream as it comes
                                 full_response += delta
-                                print(delta, end="", flush=True)  # ✅ Print instantly
                         except json.JSONDecodeError:
                             continue
-            print("\n")  # Finish with a new line
+            print()  # newline after streaming
             return full_response if full_response else None
 
     except requests.exceptions.HTTPError as e:
@@ -63,40 +60,31 @@ if not os.path.exists("users.json"):
         json.dump({"data": []}, f, indent=4)
 
 class UserProfileManager:
-
     def load_profiles(self):
         with open("users.json", "r") as f:
             return json.load(f)
 
     def get_next_user_id(self):
-        num_users = len(self.load_profiles()['data'])
-        return num_users + 1
+        return len(self.load_profiles()['data']) + 1
 
     def create_profile(self):
         user_id = self.get_next_user_id()
         name = input("Enter name: ")
-        group_size = input("Enter group size: ")
         preferred_environment = input("Enter preferred environment (Ex: Mountain, Beach, City): ")
         preferred_type = input("Enter preferred type (Ex: house, cabin, condo): ")
         must_have_features = input("Enter preferred features (comma separated, Ex: WI-FI, BBQ Grill, Washer): ").split(',')
         budget = input("Enter budget (per night): ")
-        check_in = input("Enter check-in date (YYYY-MM-DD): ")
-        check_out = input("Enter check-out date (YYYY-MM-DD): ")
-        travel_dates = [check_in, check_out]
         location = input("Enter preferred location: ")
 
         profile = {
             "user_id": user_id,
             "name": name,
-            "group_size": group_size,
             "preferred_environment": preferred_environment,
             "preferred_type": preferred_type,
             "Must_have_features": must_have_features,
             "budget": budget,
-            "travel_dates": travel_dates,
             "location": location
         }
-
         print(f"Profile created with user_id: {user_id}")
         return profile
 
@@ -106,49 +94,76 @@ class UserProfileManager:
         with open("users.json", "w") as f:
             json.dump(data, f, indent=4)
 
-    def delete_profile(self, profile):
+    def delete_profile(self, user_id):
         data = self.load_profiles()
-        data["data"] = [u for u in data["data"] if u["user_id"] != profile["user_id"]]
-        with open("users.json", "w") as f:
-            json.dump(data, f, indent=4)
-        print("Profile successfully deleted!")
+        updated_user_list = [data["data"][index] for index in range(len(data['data'])) 
+                            if data['data'][index]["user_id"] != user_id]
 
-    def edit_profile(self, profile, attribute, new_value):
+        data["data"] = updated_user_list
+        with open("users.json", "w") as f:
+            json.dump(data, f, indent = 4)
+        print("Profile successfully Deleted! ")
+
+    def edit_profile(self, user_id, attribute, new_value):
         data = self.load_profiles()
         for user in data['data']:
-            if user == profile:
+            if int(user['user_id']) == int(user_id):
                 if attribute == 'travel_dates':
-                    date_changed = input("Which date to change? (check_in/check_out): ")
+                    date_changed = input("Which date would you like to change? (check_in/check_out): ")
                     if date_changed == 'check_in':
                         user['travel_dates'][0] = new_value
-                    else:
+                    elif date_changed == 'check_out':
                         user['travel_dates'][1] = new_value
                 else:
                     if attribute in user:
                         user[attribute] = new_value
+                    else:
+                        print(f"Attribute {attribute} does not exist in the profile.")
+                        return
+                user[attribute] = new_value
+
         with open("users.json", "w") as f:
-            json.dump(data, f, indent=4)
-        print(f"Profile successfully edited with new {attribute}: {new_value}!")
+            json.dump(data, f, indent = 4)
+        print(f"Profile successfully edited with new attribute: {attribute}: {new_value}! ")
 
     def view_profile(self, user_id):
         data = self.load_profiles()
+
         if user_id == 'ALL':
+            print("")
+            print("------ ALL USERS ------")
             for user in data['data']:
-                print(f"\nUSER {user['user_id']}: {user['name']}, Location: {user['location']}")
+                print("")
+                print(f"-------------- USER {user['user_id']} --------------")
+                print(f"User ID: {user['user_id']}")
+                print(f"Name: {user['name']}")
+                print(f"Preferred Environment: {user['preferred_environment']}")
+                print(f"Preferred Type: {user['preferred_type']}")
+                print(f"Preferred Features: {user['Must_have_features']}")
+                print(f"Budget: {user['budget']}")
+                print(f"Travel Location: {user['location']}")
+                print()
         else:
-            user_profile = next((u for u in data['data'] if u['user_id'] == int(user_id)), None)
-            if user_profile:
-                print(f"USER {user_profile['user_id']}: {user_profile['name']}, Location: {user_profile['location']}")
-            else:
-                print("Profile not found.")
+            user_profile = [user for user in data['data'] 
+                            if int(user['user_id']) == int(user_id)]
+            print("")
+            print(f"-------------- USER {user_id} --------------")
+            print(f"User ID: {user_profile[0]['user_id']}")
+            print(f"Name: {user_profile[0]['name']}")
+            print(f"Preferred Environment: {user_profile[0]['preferred_environment']}")
+            print(f"Preferred Type: {user_profile[0]['preferred_type']}")
+            print(f"Preferred Features: {user_profile[0]['Must_have_features']}")
+            print(f"Budget: {user_profile[0]['budget']}")
+            print(f"Travel Location: {user_profile[0]['location']}")
+            print("-----------------------------------")
 
 # ------------------- Property Recommender -------------------
 class PropertyRecommender:
-    def __init__(self, dataset_path="properties.json"):
+    def __init__(self, dataset_path="properties_updated.json"):
         self.df = pd.read_json(dataset_path)
 
     def compute_fit_score(self, profile, property_row):
-        W_ENV, W_TYPE, W_CANCELLATION, W_BUDGET, W_FEATURES = 0.1, 0.1, 0.1, 0.4, 0.3
+        W_ENV, W_TYPE, W_CANCELLATION, W_BUDGET, W_FEATURES = 0.1, 0.1, 0.1, 0.3, 0.4
         score = 0
 
         env_tags = [t.lower() for t in property_row.data.get("Tags", [])]
@@ -185,9 +200,13 @@ class PropertyRecommender:
         recommendations = df_expanded.sort_values('fit_score', ascending=False).head(top_n).to_dict(orient="records")
 
         print("\nTop Property Recommendations:")
-        for i, prop in enumerate(recommendations, 1):
-            print(f"{i}. {prop['City']} — {prop['Type']} | ${prop['Nightly price']} per night | Features: {prop['features']} | Fit Score: {prop['fit_score']}")
-
+        for i, rec in enumerate(recommendations, 1):
+            print(f"{i}. Location: {rec['City']}")
+            print(f"   Type: {rec['Type']}, Environment: {rec['Environment']}")
+            print(f"   Cancellation: {rec['Cancellation_policy']}")
+            print(f"   Features: {rec['features']}")
+            print(f" Price: {rec['Nightly price']}")
+            print(f" Fit_Score: {rec['fit_score']} \n")
         return recommendations
 
 # ------------------- Main -------------------
@@ -212,19 +231,15 @@ def main():
             user_id = input("Enter user ID (ALL for all users): ")
             manager.view_profile(user_id)
         elif choice == "3":
-            user_id = int(input("Enter user ID to edit: "))
-            profiles = manager.load_profiles()["data"]
-            profile = next((p for p in profiles if p["user_id"] == user_id), None)
-            if profile:
-                attr = input("Attribute to edit: ")
-                new_val = input("New value: ")
-                manager.edit_profile(profile, attr, new_val)
+            user_id = input("Enter the user profile you want to edit: ")
+
+            attribute = input("What attribute would you like to update?: ")
+            new_value = input("What is the new value for this attribute? ")
+            
+            manager.edit_profile(user_id, attribute, new_value)
         elif choice == "4":
-            user_id = int(input("Enter user ID to delete: "))
-            profiles = manager.load_profiles()["data"]
-            profile = next((p for p in profiles if p["user_id"] == user_id), None)
-            if profile:
-                manager.delete_profile(profile)
+            user_id = int(input("Enter the user profile you want to delete: "))
+            manager.delete_profile(user_id)
         elif choice == "5":
             user_id = int(input("Enter user ID for recommendations: "))
             profiles = manager.load_profiles()["data"]
@@ -232,25 +247,18 @@ def main():
 
             if profile:
                 top_properties = recommender.recommend(profile, top_n=5)
-                properties_text = "\n".join([
-                    f"{i+1}. {prop['City']} — {prop['Type']} | Price: ${prop['Nightly price']} | Features: {', '.join([f.replace('"','').replace("'",'') for f in prop['features']])}"
-                    for i, prop in enumerate(top_properties)
-                ])
 
-                prompt = f"You are a smart real-estate recommender system.\n" \
-                         f"User profile: {profile}\n" \
-                         f"Consider all North American locations.\n" \
-                         f"Top 5 candidate properties:\n{properties_text}\n" \
-                         f"Recommend the best properties, rank 1-5 with simple numbering, and give a 1-2 line explanation for each."
-
-                llm_response = query_openrouter(prompt)
-                if llm_response:
-                    print("\n🔮 AI-Powered Property Recommendations:")
-                    print(llm_response)
-                else:
-                    print("\n⚠️ LLM failed, showing local recommendations:")
-                    for i, prop in enumerate(top_properties, 1):
-                        print(f"{i}. {prop['City']} — {prop['Type']} | ${prop['Nightly price']} per night")
+                for i, prop in enumerate(top_properties, 1):
+                    prompt = f""" 
+                        User reqs: {profile}.
+                        Property: {prop['City']} — {prop['Type']} | Price: ${prop['Nightly price']} | Features: {', '.join(f.replace('"','').replace("'",'') for f in prop['features'])}
+                        Task: ONLY 1 sentence (10-15 words), why property fits user reqs.
+                        """
+                    
+                    print(f"\n--- Property {i} Justification---")
+                    llm_response = query_openrouter(prompt)
+                    if not llm_response:
+                        print(f"⚠️ LLM failed for Property {i}. Local info: {prop['City']} — {prop['Type']} | ${prop['Nightly price']} per night")
             else:
                 print("Profile not found.")
         elif choice == "6":

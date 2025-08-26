@@ -1,9 +1,9 @@
 ## 1. Project information
-Title: LLM-Powered Summer Home Recommender
-Course: RSM8431 – Python 
-Instructor: Arik Senderovich
-Team: Synergy Six
-Member: Danish Siddiqui, Haolong Yang, Junyan Yue, 
+- Title: LLM-Powered Summer Home Recommender
+- Course: RSM8431 – Python 
+- Instructor: Arik Senderovich
+- Team: Synergy Six
+- Member: Danish Siddiqui, Haolong Yang, Junyan Yue, 
 Krishitha Muddasani, Siyan Li, Yuyan Zhang
 
 ## 2. Overview
@@ -23,11 +23,8 @@ This project is a Python-based command-line application that provides personaliz
 - LLM Integration (optional)
  - Generate listings, descriptions, travel tips
  - Powered by OpenRouter or OpenAI
-- Command-Line Interface
- - Menu-driven commands like create_user, view_properties, get_recommendations, etc.
 
-## 4.	Installation/Setup (Donald)
-## 5.	Usage Guide (example of input/output & Screenshots of GUI)
+## 4.	Usage Guide (example of input/output)
 
 Upon launch, you'll see a CLI menu with the following options:
 1.	Create Profile – Enter user information such as name, group size, environment, preferred type, budget, dates, and location. Saved to users.json.
@@ -38,28 +35,30 @@ Upon launch, you'll see a CLI menu with the following options:
 6.	Exit – Quit the application.
   
 Sample Input Flow:
-Enter name: Alice
-Enter group size: 3
-Enter preferred environment (Ex: Mountain, Beach, City): beach
-Enter preferred type (Ex: house, cabin, condo): house
-Enter preferred features (comma separated): WiFi, BBQ, Washer
-Enter budget (per night): 200
-Enter check in date: 2025-08-01
-Enter check out date: 2025-08-05
-Enter location: Miami
+- Enter your choice: 1
+- Enter name: Ryan Zhang
+- Enter group size: 4
+- Enter preferred environment (Ex: Mountain, Beach, City): city    
+- Enter preferred type (Ex: house, cabin, condo): Apartment
+- Enter preferred features (comma separated) (Ex: WI-FI, BBQ Grill, Washer): Coffee maker,Sauna
+- Enter budget (per night): 100
+- Enter check in date: Dec 01
+- Enter check out date: Dec 05
+- Enter location: Miami
+- profile created with user_id: 2
 
 Sample Output (Property Recommendation):
-1. Location: Miami
-   Type: House, Environment: Beach
-   Cancellation: Flexible
-   Features: WiFi, BBQ, Washer
-   Price: 185
-   Fit_Score: 8.6
+- 1. Location: Miami
+   - Type: Apartment, Environment: city
+   - Cancellation: flexible
+   - Features: ["'Washer & Dryer'", "'Basic toiletries'", "'Crib / High chair'", "'Concierge services'", "'Sauna'"]
+   - Price: 42
+   - Fit_Score: 5.32
 
-## 6. Team contributions 
+## 5. Team contributions 
 | Member             | Contribution                              |
 |--------------------|-------------------------------------------|
-| Danish Siddiqui    | JSON property loader, Recommender logic, UI Design |
+| Danish Siddiqui    | JSON property loader, Recommender logic，LLM Integration |
 | Haolong Yang       | Recommender logic, Documentation          |
 | Junyan Yue         | Recommender logic, Testing                |
 | Krishitha Muddasani| User flow design, LLM Integration         |
@@ -67,12 +66,12 @@ Sample Output (Property Recommendation):
 | Yuyan Zhang        | Data cleaning, Testing                    |
 
 
-## 7. Limitation for future improvement 
+## 6. Limitation for future improvement 
 - No authentication or login system
 - Currently CLI-based — GUI or web version would improve usability
 - Scoring model is basic — can let the users decide the weight based on their own preferences to allow maximum customization
 
-## 8. Reference: original data source is from Airbnb Listing
+## 7. Reference: original data source is from Airbnb Listing （https://www.kaggle.com/code/qusaybtoush1990/airbnb-analysis-dataset/input）
 To ensure consistent and relevant data for the recommender system, the following data cleaning steps were applied to the original dataset:
 1.	Remove Unnecessary Attributes
 Columns that were irrelevant to the recommendation logic (e.g., host info, reviews, URLs) were dropped to reduce complexity.

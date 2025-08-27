@@ -13,16 +13,16 @@ This project is a Python-based command-line application that provides personaliz
 ## 3. Features
 - User Profile Management
  - Create, edit, view, delete profiles
- - Input: user_id, name, group_size, preferred_environment, preferred_type, Must_have_features, budget, travel_dates, location
+ - Input: user_id, name, preferred_environment, preferred_type, Must_have_features, budget, location
 - Property Listings
  - Load property data from JSON
  - Properties include city, type, nightly price, cancellation policy, review scores rating, picture url, tags, features, and environment
 - Recommender System
  - Fit score based on budget match, type, cancellation policy, must-have features, and preferred environment preferences
  - Top-5 ranking output
-- LLM Integration (optional)
- - Generate listings, descriptions, travel tips
- - Powered by OpenRouter or OpenAI
+- LLM Integration 
+ - Justification for alignments
+ - Powered by OpenRouter & Deepseek
 
 ## 4.	Usage Guide (example of input/output)
 
@@ -37,13 +37,10 @@ Upon launch, you'll see a CLI menu with the following options:
 Sample Input Flow:
 - Enter your choice: 1
 - Enter name: Ryan Zhang
-- Enter group size: 4
 - Enter preferred environment (Ex: Mountain, Beach, City): city    
 - Enter preferred type (Ex: house, cabin, condo): Apartment
-- Enter preferred features (comma separated) (Ex: WI-FI, BBQ Grill, Washer): Coffee maker,Sauna
+- Enter preferred features (comma separated) (Ex: WI-FI, BBQ Grill, Washer): Coffee maker, Sauna
 - Enter budget (per night): 100
-- Enter check in date: Dec 01
-- Enter check out date: Dec 05
 - Enter location: Miami
 - profile created with user_id: 2
 
@@ -74,13 +71,13 @@ Sample Output (Property Recommendation):
 ## 7. Reference: original data source is from Airbnb Listing （https://www.kaggle.com/code/qusaybtoush1990/airbnb-analysis-dataset/input）
 To ensure consistent and relevant data for the recommender system, the following data cleaning steps were applied to the original dataset:
 1.	Remove Unnecessary Attributes
-Columns that were irrelevant to the recommendation logic (e.g., host info, reviews, URLs) were dropped to reduce complexity.
+- Columns that were irrelevant to the recommendation logic (e.g., host info, reviews, URLs) were dropped to reduce complexity.
 2.	Handle Missing Data
-Entries with critical missing fields such as price, location, or property type were removed. Empty cells were filtered or filled when appropriate.
+- Entries with critical missing fields such as price, location, or property type were removed. Empty cells were filtered or filled when appropriate.
 3.	Normalize Formats and Types
-Ensured consistency in data types (e.g., prices as integers, features as lists). All text fields were converted to lowercase to support case-insensitive matching.
+- Ensured consistency in data types (e.g., prices as integers, features as lists). All text fields were converted to lowercase to support case-insensitive matching.
 4.	Tag Extraction from Descriptions
-Tags such as "family-friendly", "remote", and "pet-friendly" were programmatically extracted from the property descriptions using keyword matching to enrich each listing's metadata.
+- Tags such as "family-friendly", "remote", and "pet-friendly" were programmatically extracted from the property descriptions using keyword matching to enrich each listing's metadata.
 
 ## License
 Educational use only. No commercial redistribution.

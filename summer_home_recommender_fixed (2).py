@@ -234,7 +234,7 @@ def main():
     recommender = PropertyRecommender()
 
     while True:
-        print("\nUser Profile Manager")
+        print("\n-----Score My Stay-----")
         print("1. Create Profile")
         print("2. View Profile")
         print("3. Edit Profile")

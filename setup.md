@@ -30,6 +30,9 @@ venv\Scripts\activate      # On Windows
 ### 3.3 Install dependencies
 pip install -r requirements.txt
 
+### 3.4 LLM Integration
+.env file to be created and the unique Open Router API key to be added in the .env file
+
 ## 4. Running the Project
 
 ```python

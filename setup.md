@@ -31,7 +31,8 @@ venv\Scripts\activate      # On Windows
 pip install -r requirements.txt
 
 ### 3.4 LLM Integration
-.env file to be created and the unique Open Router API key to be added in the .env file
+.env file to be created and the unique Open Router API key to be added in the .env file as below
+OPENROUTER_API_KEY=your_unique_openrouter_api_key
 
 ## 4. Running the Project
 

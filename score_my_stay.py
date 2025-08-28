@@ -115,21 +115,23 @@ class UserProfileManager:
         print("Profile successfully Deleted! ")
 
     def edit_profile(self, user_id, attribute, new_value):
+        '''
+        'attribute' should be one of: 
+
+            [name, preferred_environment, preferred_type, 
+            Must_have_features, budget, location  ]
+        '''
+        
         data = self.load_profiles()
         for user in data['data']:
             if int(user['user_id']) == int(user_id):
-                if attribute == 'travel_dates':
-                    date_changed = input("Which date would you like to change? (check_in/check_out): ")
-                    if date_changed == 'check_in':
-                        user['travel_dates'][0] = new_value
-                    elif date_changed == 'check_out':
-                        user['travel_dates'][1] = new_value
+                if attribute in user and attribute != 'user_id':
+                    if attribute == 'Must_have_features':
+                        new_value = new_value.split()
+                    user[attribute] = new_value
                 else:
-                    if attribute in user:
-                        user[attribute] = new_value
-                    else:
-                        print(f"Attribute {attribute} does not exist in the profile.")
-                        return
+                    print(f"Attribute {attribute} does not exist in the profile.")
+                    return
                 user[attribute] = new_value
 
         with open("users.json", "w") as f:

@@ -1,3 +1,6 @@
+# This code is adopted from OpenAI's official examples.
+# Source: OpenAI (2023)
+
 import os
 import json
 import pandas as pd
@@ -40,11 +43,11 @@ def query_openrouter(prompt):
                             content = json.loads(chunk)
                             delta = content.get("choices", [{}])[0].get("delta", {}).get("content", "")
                             if delta:
-                                print(delta, end="", flush=True)  # 👈 stream as it comes
+                                print(delta, end="", flush=True)
                                 full_response += delta
                         except json.JSONDecodeError:
                             continue
-            print()  # newline after streaming
+            print()
             return full_response if full_response else None
 
     except requests.exceptions.HTTPError as e:
@@ -73,7 +76,14 @@ class UserProfileManager:
         preferred_environment = input("Enter preferred environment (Ex: Mountain, Beach, City): ")
         preferred_type = input("Enter preferred type (Ex: house, cabin, condo): ")
         must_have_features = input("Enter preferred features (comma separated, Ex: WI-FI, BBQ Grill, Washer): ").split(',')
-        budget = input("Enter budget (per night): ")
+
+        while True:
+            try:
+                budget = int(input("Enter budget (per night): "))
+                break
+            except ValueError:
+                print("Please enter a valid number for the budget.")
+
         location = input("Enter preferred location: ")
 
         profile = {

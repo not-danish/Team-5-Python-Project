@@ -31,7 +31,7 @@ Upon launch, you'll see a CLI menu with the following options:
 2.	View Profile 
 3.	Edit Profile – Update specific fields in an existing profile by providing the attribute and a new value.
 4.	Delete Profile – Remove a user profile from the system.
-5.	Property Recommendations – Enter your user ID to receive your Top-5 recommended listings ranked by a fit score.
+5.	Property Recommendations – Enter your user ID to receive your Top-5 recommended listings, along with the justifications ranked by a fit score and the justifications by the LLM. 
 6.	Exit – Quit the application.
   
 Sample Input Flow:

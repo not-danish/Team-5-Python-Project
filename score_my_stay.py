@@ -1,5 +1,5 @@
 # This code is adopted from OpenAI's official examples.
-# Source: OpenAI (2023) https://github.com/openai/openai-cookbook
+# OpenAI. (2025). ChatGPT (March 2025 version) [Large language model]. https://chat.openai.com/
 
 import os
 import json
@@ -121,7 +121,7 @@ class UserProfileManager:
             [name, preferred_environment, preferred_type, 
             Must_have_features, budget, location  ]
         '''
-        
+
         data = self.load_profiles()
         for user in data['data']:
             if int(user['user_id']) == int(user_id):

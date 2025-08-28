@@ -37,7 +37,7 @@ OPENROUTER_API_KEY=your_unique_openrouter_api_key
 ## 4. Running the Project
 
 ```python
-python score_my_stay.py
+python3 score_my_stay.py
  ```
 
 And here is what will show

@@ -12,23 +12,23 @@ This project is a Python-based command-line application that provides personaliz
 
 ## 3. Features
 - User Profile Management
- - Create, edit, view, delete profiles
- - Input: user_id, name, preferred_environment, preferred_type, Must_have_features, budget, location
+  - Create, edit, view, delete profiles
+  - Input: user_id, name, preferred_environment, preferred_type, Must_have_features, budget, location
 - Property Listings
- - Load property data from JSON
- - Properties include city, type, nightly price, cancellation policy, review scores rating, picture url, tags, features, and environment
+  - Load property data from JSON
+  - Properties include city, type, nightly price, cancellation policy, review scores rating, picture url, tags, features, and environment
 - Recommender System
- - Fit score based on budget match, type, cancellation policy, must-have features, and preferred environment preferences
- - Top-5 ranking output
+  - Fit score based on budget match, type, cancellation policy, must-have features, and preferred environment preferences
+  - Top-5 ranking output
 - LLM Integration 
- - Justification for alignments
- - Powered by OpenRouter & Deepseek
+  - Justification for alignments
+  - Powered by OpenRouter & Deepseek
 
 ## 4.	Usage Guide (example of input/output)
 
 Upon launch, you'll see a CLI menu with the following options:
 1.	Create Profile – Enter user information such as name, group size, environment, preferred type, budget, dates, and location. Saved to users.json.
-2.	View Profile – (Not yet implemented)
+2.	View Profile 
 3.	Edit Profile – Update specific fields in an existing profile by providing the attribute and a new value.
 4.	Delete Profile – Remove a user profile from the system.
 5.	Property Recommendations – Enter your user ID to receive your Top-5 recommended listings ranked by a fit score.

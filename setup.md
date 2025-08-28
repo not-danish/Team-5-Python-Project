@@ -19,7 +19,7 @@ In this project, generally, the aim is to provide one platform which can help us
 ## 3. Installation
 
 ### 3.1 Clone the repository
-git clone http://github.com/not-danish/Team-5-Python-Project/blob/main/Python%20Project_yoyo.py
+git clone https://github.com/not-danish/Team-5-Python-Project
 cd property-matching
 
 ### 3.2 Create a virtual environment

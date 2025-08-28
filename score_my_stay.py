@@ -1,5 +1,5 @@
 # This code is adopted from OpenAI's official examples.
-# Source: OpenAI (2023)
+# Source: OpenAI (2023) https://github.com/openai/openai-cookbook
 
 import os
 import json
